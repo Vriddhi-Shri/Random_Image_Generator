@@ -1,0 +1,202 @@
+<html>
+	<head>
+		<title>Random Image Generator</title>
+		
+        <style>
+            body{
+                background: radial-gradient(circle,#24246e,#06051f);
+                height: 100vh;
+            }
+            .wrapper span{
+                position: fixed;
+                top: -120px;
+                height: 50px;
+                width: 50px;
+                z-index: -1;
+                animation: animate 10s linear infinite;    
+            }
+            .wrapper span:nth-child(1){
+                left: 60px;
+                animation-delay:0.6s;
+                border: 5px solid cyan;
+            }
+            .wrapper span:nth-child(2){
+                left: 60%;
+                animation-delay: 3s;
+                width: 60px;
+                height: 60px;
+                background: #ff4293;
+            }
+            .wrapper span:nth-child(3){
+                left: 20%;
+                animation-delay: 2s;
+                border: 5px solid #fff;    
+            }
+            .wrapper span:nth-child(4){
+                left: 30%;
+                animation-delay: 5s;
+                width: 80px;
+                height: 80px;
+                background: #befb46;
+            }
+            .wrapper span:nth-child(5){
+                left: 40%;
+                animation-delay: 1s;
+                border: 5px solid #ff4293;
+            }
+            .wrapper span:nth-child(6){
+                left: 50%;
+                animation-delay: 7s;
+                border: 5px solid deepskyblue;
+            }
+            .wrapper span:nth-child(7){
+                left: 60%;
+                animation-delay: 6s;
+                width: 100px;
+                height: 100px;
+                background: #ffd59e;
+            }
+            .wrapper span:nth-child(8){
+                left: 70%;
+                animation-delay: 8s;
+                border: 5px solid #befb46;
+            }
+            .wrapper span:nth-child(9){
+                left: 80%;
+                animation-delay: 6s;
+                width: 90px;
+                height: 90px;
+                background: cyan;
+            }
+            .wrapper span:nth-child(10){
+                left: 90%;
+                animation-delay: 4s;
+                border: 5px solid #fff;    
+            }
+            .banner{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+            .content h2{
+                -webkit-text-fill-color: #fff;
+                -webkit-text-stroke-width: 3px;
+                -webkit-text-stroke-color: #fff;
+                font-family: montserrat;
+                font-size: 80px;
+                text-transform: uppercase;
+                letter-spacing: 12px;
+                text-align: center;
+                line-height: 0.9;
+            }
+            .content h2 b{
+                -webkit-text-fill-color: transparent;
+                font-size: 65px;
+            }
+            @keyframes animate{
+                0%{
+                    transform: translateY(0);
+                    opacity: 0;
+                }
+                80%{
+                    opacity: 0.7;
+                }
+                100%{
+                    transform: translateY(800px) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+            
+            html, body {
+                margin: 0;
+                height: 100%;
+                width: 100%;
+            }
+            
+            header {
+                width: 100%;
+                padding-bottom: 16px;
+                flex-direction: column;
+            }
+            
+            img {
+                width: 500px;
+                height : 500px;
+                {% comment %} border: 5px solid #555; {% endcomment %}
+                padding-bottom: 16px;
+                margin-left: -4px;
+                mergin-right:auto;
+                
+                
+            }  
+            
+            .flex {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+           }
+    
+          
+        </style>
+	</head>
+	<body>
+        <div class="wrapper">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+    </div>
+    
+    
+		<header class="flex">
+			<h1 style="color:darkturquoise;">Random Image Generator</h1>
+            <div class="imageContainer">
+                <a id="imageLink" href="#">
+                  <img alt="" id="unsplashImage" />
+                </a>
+             </div> 
+ 
+            <script>
+                let clientID = "eXU3JbpkvgRVGoO92G--L8YEth-29SfrEIQLkZ7OjNI";
+                let endpoint =`https://api.unsplash.com/photos/random/?client_id=${clientID}`;
+                
+                let imageElement = document.querySelector("#unsplashImage");
+                let imageLink = document.querySelector("#imageLink");
+                let creator = document.querySelector("#creator");
+
+                fetch(endpoint)
+                    .then((response) => response.json())
+                    
+                
+                    .then((jsonData) =>{
+                    imageElement.src=jsonData.urls.regular;
+
+                    
+                    })
+                    .catch((error)=> {
+                        console.log("Error: " + error);
+                    });
+              </script>
+  
+             {% comment %} <button style="background-color : blue; border-color:black" type="button" class="btn btn-primary" onclick="location.href='{%url 'image' %}'" >Click to get Random Image</button> {% endcomment %}
+             <button type="button" style= "border-color:black" class="btn btn-primary btn-lg" onclick="location.href='{%url 'image' %}'"><h4 
+                style="
+                margin-top: 10.733;
+                border-top-width: 100px;
+                margin-bottom: 10.733;
+            ">Click to get Random Image</h4></button>
+        </header>
+        
+
+		
+        
+	
+	</body>
+</html>

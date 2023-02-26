@@ -1,0 +1,70 @@
+<html>
+	<head>
+		<title>Random Picture Generator</title>
+		{% comment %} <link rel="stylesheet" href="assets/stylesheets/app.css"> {% endcomment %}
+        <style>
+            html, body {
+                margin: 0;
+                height: 100%;
+                width: 100%;
+            }
+            
+            header {
+                width: 100%;
+                padding-bottom: 25px;
+                flex-direction: column;
+            }
+            
+            img {
+                width: 500px;
+            height : 500px;
+            padding-bottom: 25px;
+            margin-left: -4px;
+            mergin-right:auto;
+            }
+            
+            .flex {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        </style>
+	</head>
+	<body>
+		<header class="flex">
+			<h1>Random Picture Generator</h1>
+            <div class="imageContainer">
+                <a id="imageLink" href="#">
+                  <img alt="" id="unsplashImage" />
+                </a>
+              </div> 
+             
+			<script>
+                let clientID = "eXU3JbpkvgRVGoO92G--L8YEth-29SfrEIQLkZ7OjNI";
+                let endpoint =`https://api.unsplash.com/photos/random/?client_id=${clientID}`;
+                
+                let imageElement = document.querySelector("#unsplashImage");
+                let imageLink = document.querySelector("#imageLink");
+                let creator = document.querySelector("#creator");
+            
+                fetch(endpoint)
+                    .then((response) => response.json())
+                      
+                  
+                    .then((jsonData) =>{
+                       imageElement.src=jsonData.urls.regular;
+            
+                    
+                    })
+                    .catch((error)=> {
+                        console.log("Error: " + error);
+                    });
+              </script>
+              
+              <button type="button" class="btn btn-primary" onclick="location.href='{%url 'image' %}'" >Click to get Random Image</button>
+            
+		</header>
+		
+		
+	</body>
+</html>
